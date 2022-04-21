@@ -1,0 +1,223 @@
+\documentclass[a4paper]{article}
+
+\usepackage{/template/configs/base}
+
+\begin{document}
+
+\Init{Un morpion pour sauver le monde}{}{}{2.1.1}
+\InitInfo{morpion}{python}{pygame}{}{3h}{1}
+
+\Hypersetup
+
+\Cover
+
+\Intro{
+\vspace*{1cm}
+\Section{Introduction} 
+
+\vspace*{0.5cm}
+
+\setlength{\parindent}{6ex}Au début de la décennie, en 1980, le monde vit avec la peur constante d’un conflit nucléaire. Pour être sûr d’être prêt à riposter, une puissance occidentale a developpé un ordinateur capable de simuler le conflit en continu ; en cas d’attaque, il serait alors capable de riposter de la meilleure façon. Le problème, c’est que cet ordinateur est devenu aussi paranoïaque qu’un être humain, et a donc décidé de déclencher sans provocation un conflit nucléaire. Il a toutefois donné une condition pour qu’il arrête la procédure avant qu’il ne soit trop tard : il faut lui démontrer que les êtres humains sont plus qu’une créature qui agit selon son instinct. Pour ce faire, il vous défie au morpion. 
+Votre mission, si vous décidez de l’accepter, est de créer un jeu du morpion en Python. 
+\begin {center}
+\ImageCenter{morpion.png}{300}
+\textit{Aperçu du morpion}
+\end {center}
+
+}
+
+\newpage
+
+\Section{Consignes}
+
+\vspace*{1cm}
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\setlength{\parindent}{3ex}\item En cas de question, pensez à demander de l’aide à votre voisin de droite. Puis de gauche. Ou inversement. 
+Puis demandez enfin à un Cobra si vous êtes toujours bloqué(e).
+
+\setlength{\parindent}{3ex}\item Suivez bien la documentation d’installation pour python “Python et ces outils”.
+
+\setlength{\parindent}{3ex}\item Si l’installation d’un logiciel se déroule mal, recommencez depuis le début.
+
+\setlength{\parindent}{3ex}\item Pensez à faire valider votre projet par un Cobra lorsque vous aurez terminé.
+
+\end{itemize}
+
+
+\newpage
+\Section{La logique avant tout}
+
+\vspace*{0.5cm}
+
+\setlength{\parindent}{10ex}
+\Subsection{Un maxi outil qui sera utile !}
+
+\vspace*{1cm}
+
+\setlength{\parindent}{3ex}Pygame est une Bibliothèque libre multiplateforme qui a pour but de faciliter le développement de Jeux vidéos, infographie, gestion audio, avec le langage de programmation Python. Vous allez utiliser aujourd’hui pour sauver le monde d’un hiver nucléaire !
+Pygame a commencé son développement en 2000, de nombreux logiciels amateurs l’utilisent encore aujourd’hui. La librairie est un des piliers des jeux homebrew, indépendants open source !
+
+
+\begin {center}
+\ImageCenter{pygame.png}{90}
+\textit{Logo pygame}
+\end {center}
+
+\vspace*{1cm}
+
+\setlength{\parindent}{10ex} 
+\Subsection{Une vue d’ensemble}
+
+\vspace*{1cm}
+\setlength{\parindent}{3ex}La première étape est celle d’expérimentation, il faut créer et afficher un tableau 3x3 sur un terminal. Vous pouvez tester que le tableau fonctionne correctement en ajoutant des croix ou des cercles dans des cases. A la fin, vous devriez avoir quelque chose dans ce style.
+
+\vspace*{1cm}
+
+\begin {center}
+\ImageCenter{first.png}{150}
+\textit{Aperçu de la map}
+\end {center}
+
+\vspace*{1cm}
+
+\newpage
+
+\setlength{\parindent}{10ex}
+\Subsection{Les jeux sont lancés}
+
+\vspace*{1cm}
+\setlength{\parindent}{3ex}Vous avez réussi à afficher le tableau de jeu, mais pour le moment il n’y a pas de jeu à proprement parler. Votre prochain objectif est d’implémenter une boucle de jeu, c’est-à-dire une liste d’instructions qui vont se répéter jusqu’à ce que le jeu se termine.
+A ce stade, la boucle de jeu devra contenir :
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Un indicateur du joueur courant (du tour) : Joueur 1 ou 2
+
+\item Un système pour récupérer la position saisie par l’utilisateur
+
+\item Un moyen de placer une croix ou un rond (selon le joueur) dans le tableau de jeu
+
+\item Un affichage sur terminal le tableau à la fin de chaque tour
+\end{itemize}
+Vous devez récupérer la position, en utilisant la fonction input. Cliquez sur ce \href{https://www.w3schools.com/python/ref_func_input.asp}{\textbf{\textit{lien}}} pour vous aider.
+
+\vspace*{1cm}
+
+\begin {center}
+\ImageCenter{second.png}{300}
+\textit{Aperçu du jeu}
+\end {center}
+
+
+\vspace*{1cm}
+
+\newpage
+
+\setlength{\parindent}{10ex}
+\Subsection{Les jeux sont terminés}
+
+\vspace*{1cm}
+
+\setlength{\parindent}{3ex}Votre jeu est presque complet, il doit seulement pouvoir se terminer. Vous pouvez regarder ici pour vous rafraîchir la mémoire sur les règles du jeu.
+
+En somme, vous devez être capable de :
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Détecter la fin du jeu et déclarer un vainqueur
+
+\item Éviter que l’on puisse sélectionner une case déjà prise
+\end{itemize}
+
+\center{\textbf{Félicitations vous avez un jeu sur terminal fonctionnel!}}
+\ImageCenter{etoile.png}{50}
+
+\vspace*{1cm}
+
+\Section{Une bonne impression}
+\vspace*{0.5cm}
+
+\begin{flushleft}
+\setlength{\parindent}{10ex}
+\Subsection{Il faut ouvrir la fenêtre}
+
+
+
+\vspace*{1cm}
+
+\setlength{\parindent}{3ex} Vous avez réussi à impressionner l’ordinateur. Il a accepté de mettre en pause son attaque, mais vous donne un deuxième défi pour lui démontrer que vous n’avez plus besoin de lui, que les humains sont capables de penser avant d’agir.
+
+Vous devez, en reprenant le morpion sur terminal, le transformer en un vrai jeu, avec des graphismes grâce à Pygame.
+
+Pour ce faire, la première chose à faire est d’ouvrir une fenêtre qui devra :
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Avoir une taille de 600 par 700 
+
+\item Un titre de “Morpion”
+\end{itemize}
+Pour vous aider \href{https://zestedesavoir.com/tutoriels/846/pygame-pour-les-zesteurs/1381_a-la-decouverte-de-pygame/creer-une-simple-fenetre-personnalisable/#:~:text=Pour%20obtenir%20une%20fen%C3%AAtre%20comme,%2C%20et%20ce%20en%20FULLSCREEN%20%22.}{\textbf{\textit{cliquez-ici}}}.
+ Elle devra aussi répondre à certains événements utilisateur, comme le fait de fermer la fenêtre quand l’utilisateur clique sur la croix de la fenêtre.
+
+\vspace*{1cm}
+\end{flushleft}
+
+\newpage
+
+\begin{flushleft}
+\setlength{\parindent}{10ex}
+\Subsection{Que le fond, les croix et les ronds apparaissent}
+
+\vspace*{1cm}
+\setlength{\parindent}{3ex}Vous avez affiché une fenêtre, très bien ! Mais l’ordinateur n’est pas tellement impressionné. En effet, une fenêtre vide est beaucoup moins utile que ce que vous lui aviez présenté auparavant. Il est donc venu le moment d’afficher des images dans votre nouvelle fenêtre. Il vous faut donc :
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Charger l’image d’un rond
+
+\item Charger l’image d’une croix
+
+\item Charger l’image d’un fond 
+\end{itemize}
+Une fois les images chargées, vous devez ensuite les afficher sur l’écran.Vous pouvez vous rendre sur ce \href{https://zestedesavoir.com/tutoriels/846/pygame-pour-les-zesteurs/1381_a-la-decouverte-de-pygame/5505_afficher-des-images/}{\textbf{\textit{lien}}} pour vous aider.
+
+\end{flushleft}
+\center{\textbf{Encore un effort ! On y est presque !}} 
+\ImageCenter{etoile.png}{50}
+
+\begin{flushleft}
+\Section{De l’interaction}
+
+\vspace*{1cm}
+
+\setlength{\parindent}{3ex}L’ordinateur est assez content, vous affichez des images. Cependant, le plus dur reste à venir, car afficher des images c’est bien, mais quand l’utilisateur peut se servir de l’application, c’est mieux. Il vous faut maintenant pouvoir jouer à cette version du morpion. Pour ce faire, vous devez :
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Récupérer la position de la souris lors d’un clic avec la fonction \textit{pygame.mouse.get\_pos()}
+
+\item Vérifier si la position de la souris est dans une case du morpion
+
+\item Selon le tour du joueur, afficher une croix ou un rond sur la case
+\end{itemize}
+Le résultat pourrait être quelque chose dans le style :
+\end{flushleft}
+\begin {center}
+\ImageCenter{morpion2.png}{190}
+\textit{Exemple morpion en pygame}
+\end {center}
+
+
+\newpage
+
+\begin{flushleft}
+
+\Section{Conclusion}
+
+\vspace*{1cm}
+
+\setlength{\parindent}{3ex}Bravo, vous avez sauvé le monde d’une catastrophe nucléaire ! Mais la menace est toujours là : vous n’avez pas réussi à éteindre l’ordinateur qui vous menaçait. Pour ce faire, vous pouvez essayer de le faire effectivement jouer au morpion que vous avez fini de programmer.
+
+Voici quelques bonus:
+\begin{itemize}[label=\textbullet,font=\color{black}] 
+\item Ajouter un algorithme qui a pour but de gagner la partie
+
+\item Ajouter un menu pour sélectionner le mode de jeu : joueur contre joueur ou intelligence artificielle contre joueur
+
+\item Ajouter un mode intelligence artificielle contre intelligence artificielle
+\end{itemize}
+\end{flushleft}
+
+
+\end{document}

@@ -1,0 +1,86 @@
+Il y a quelques minutes, Yuri - astronaute en mission de réparation d'un satellite - a du s'éjecter en urgence dans un petit module pour éviter une explosion imminente. Seulement, le tableau de bord de son module est cassé et il va devoir éviter un nuage d'astéroïdes dans 2 h. Il t'a envoyé un message de SOS, car le code du tableau de bord ne peut être modifié que depuis le sol. Aide Yuri à réparer son module et à rentrer sain et sauf de sa mission.
+
+
+A- Préparation
+1-  Récupère les fichiers index.html, sketch.js ainsi que le dossier ressources.
+2-  Installe l'éditeur de code Visual Studio Code (vscode) et son extension LiveServer (https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+3-  Ouvre le projet dans vscode et lance le serveur avec le bouton "Go Live" en bas à gauche du logiciel.
+4-  [Explications des parties du code: constantes, variables, classes, fonctions]
+
+
+B- La Capsule
+Dans cette partie, nous allons créer notre capsule, l'afficher et la déplacer en utilisant le clavier.
+1-  Remplis la méthode display de la classe capsule afin d'afficher un carré blanc aux coordonnées x et y de la capsule.
+    Aide-toi de ce qui a été fait pour les astéroïdes. Tu auras sûrement besoin de la constante CAPSULE_Y.
+    Tu devrais voir apparaître un carré blanc en haut à gauche de l'écran.
+    [capsule_display.png]
+2-  Remplace les 0 de la ligne <this.position = createVector(0, 0);> pour que la capsule apparaisse en bas et au milieu de la largeur de l'écran.
+    [capsule_positioning.png]
+3-  Les fonctions keyPressed et keyReleased modifient la direction de la capsule lorsqu'une touche est pressée.
+    Complète cette méthode move afin que la position en x de la capsule puisse être modifiée en fonction de la direction.
+    Tu auras besoin des attributs direction (this.direction), speed et position de la capsule.
+4-  Super ! La capsule se déplace de gauche à droite. Il nous reste cependant à vérifier qu'elle ne sorte pas de l'écran.
+    Ajoute une condition (https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Logical_AND) qui empeche le déplacement si la position en x est hors de l'écran.
+
+
+C- Un grand BOUM
+Pour l'instant, les asteroides et la capsule se rencontrent sans conséquences. Nous allons remédier à cela...
+1-  Dans la méthode checkCollision de la classe Asteroid, ajoute le code suivant et complète le pour détecter les collisions entre un astéroide et la capsule.
+    Lorsqu'une collision est détectée, la variable game_over doit être mise sur true.
+    <
+        if (this.position.x < ... &&
+            this.position.x + this.size > ... &&
+            ... &&
+            ...) {
+            ...
+        }
+    >
+2-  Occupons-nous désormais de l'écran de fin. Ajoute une variable game_over_img dans la partie variable puis une fonction preload au-dessus de la fonction setup.
+    Dans cette fonction preload, charge l'image dont le chemin est décrit par IMG_GAME_OVER dans la variable game_over_img.
+    Ce lien (https://p5js.org/reference/#/p5/image) pourrait t'être utile !
+3-  A la fin de la fonction draw, affiche cette image au centre de l'écran avec les dimensions GAME_OVER_WIDTH et GAME_OVER_HEIGHT.
+4-  Comme tu le vois, l'image reste au centre de l'image mais nous ne souhaitons la voir que lorsque la capsule a heurté un astéroide.
+    Ajoute une condition if...else dans la fonction draw qui fait tourner le jeu normalement puis qui affiche l'image de game over si la partie est terminée.
+5-  Dans la fonction keyPressed, met la variable game_over sur false pour continuer la partie si R est pressé.
+    Tu remarqueras qu'appuyer sur la touche R ne suffit pas à redémarrer la partie. En effet, l'astéroide est toujours en collision avec la capsule.
+6-  Toujours si R est pressé de la fonction keyPressed, appelle la méthode init de tous les astéroïdes grâce à une boucle for...of (https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/for...of).
+    Ajoute une vérification dans la condition pour t'assurer que la partie est bien terminée avant d'éxecuter les lignes que tu viens d'écrire.
+
+D- Mets des étoiles dans ma vie
+C'est désormais l'heure de peupler ce ciel sombre d'étoiles. Tu vas les faire défiler avec un effet de parallaxe à la manière de la pluie dans cet extrait (https://youtu.be/KkyIDI6rQJI?t=692).
+1-  Crée une nouvelle classe (https://p5js.org/reference/#/p5/class) Star au dessus de Asteroid. Comme dans cette dernière, ajoute une méthode init - pour l'instant vide - que tu appelles dans le constructeur.
+2-  Ajoute un attribut position dans le constructeur puis complète ces lignes que tu dois ajouter à la méthode init de ta nouvelle classe.
+    <
+        this.size = random(..., ...);
+        this.position.set(random(-this.size, WIDTH), random(-this.size, -HEIGHT));
+        this.speed = ... * this.size;
+    >
+    TIP: Pour créer un effet de parallaxe réussi, il faut que la vitesse de l'étoile dépende de sa taille.
+3-  Crée une méthode display qui affiche un cercle (https://p5js.org/reference/#/p5/circle) de couleur STAR_COLOR aux coordonnées de l'étoile et de la taille de l'étoile.
+4-  Crée une méthode fall qui fait diminuer la position en y de l'étoile par sa vitesse.
+5-  Ajoute dans cette méthode une condition if qui appelle la méthode init de l'étoile lorsque la position en y dépasse le bord de l'écran.
+6-  Dans la fonction setup, ajoute une boucle for (https://p5js.org/reference/#/p5/for). Cette boucle est presque identique à celle déjà présente mais crée des objets Star qu'elle ajoute au tableau stars tant que STAR_NB est inférieur à i.
+7-  Dans la fonction draw, juste après avoir affiché l'arrière plan, appelle la méthode draw puis la méthode fall de toutes les étoiles grâce à une boucle for...of.
+
+
+E- Des graphismes
+Pour finir, nous allons embellir le résultat en faisant un peu de graphisme.
+1-  Ajoute une variable capsule_img dans la partie variable puis une charge l'image dont le chemin est décrit par IMG_CAPSULE dedans au niveau de ta fonction preload.
+    TIP: N'oublie pas d'utiliser la taille de la capsule dans l'affichage de l'image.
+2-  Supprime les lignes de la méthode display de la classe capsule et utilise la fonction image pour afficher l'image que tu viens de charger.
+Après la capsule, occupons nous maintenant des astéroides !
+3-  Ajoute une variable asteroids_img dans la fonction preload en complètant ce code:
+    <
+        asteroids_img = [..., ..., ..., ...]
+    >
+4-  Définis un attribut img dans la fonction init de la classe Asteroid, elle doit prendre aléatoirement une valeur du tableau asteroids_img.
+5-  Utilise la focntion image pour remplacer les lignes de la fonction display en affichant l'image de l'astéroïdes.
+
+Bravo, tu as aidé Yuri à prendre les commandes pour s'échapper !
+Tu souhaites aller plus loin ? Tu pourrais par exemple:
+-Créer un système de score et un scoreboard
+-Ajouter un rayon laser sur la capsule pour détruire les astéroïdes qui sont en face à l'appui d'une touche
+-Ajouter des images à la place des carrés unicolores des astéroïdes
+-Implémenter des boosts ou des malus
+
+//TODO: Atom, images astéroides
